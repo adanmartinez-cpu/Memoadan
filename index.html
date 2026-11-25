@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Equipo Estrella">
+  <meta name="theme-color" content="#667eea">
+  <title>Memorama Equipo Estrella</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icono-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ================= PANTALLA DE BIENVENIDA ================= -->
+  <div id="splash-screen">
+    <img src="icono-192.png" alt="Logo" class="logo-splash" onerror="this.style.display='none'">
+    <h1>Equipo Estrella</h1>
+    <p class="frase-splash">"Brillando juntos en cada jugada"</p>
+  </div>
+
+  <!-- ================= PANTALLA DE INICIO ================= -->
+  <div id="pantalla-inicio" class="pantalla">
+    <h1>🧠 Memorama</h1>
+    <p class="subtitulo">Elige tu nivel y juega</p>
+
+    <div class="menu-inicio">
+      <div class="dificultad-container">
+        <button id="btnFacil" class="btn-dificultad activo" data-parejas="4" data-tiempo="60">
+          🟢 Fácil<br><small>4 parejas - 60s</small>
+        </button>
+        <button id="btnMedio" class="btn-dificultad" data-parejas="8" data-tiempo="120">
+          🟡 Medio<br><small>8 parejas - 2min</small>
+        </button>
+        <button id="btnDificil" class="btn-dificultad" data-parejas="12" data-tiempo="180">
+          🔴 Difícil<br><small>12 parejas - 3min</small>
+        </button>
+      </div>
+
+      <div class="jugadores-container">
+        <button id="btn1Jugador" class="btn-jugador activo">👤 1 Jugador</button>
+        <button id="btn2Jugadores" class="btn-jugador">👥 2 Jugadores</button>
+      </div>
+
+      <div id="nombresJugadores" class="nombres-container oculto">
+        <input type="text" id="nombreJ1" placeholder="Nombre Jugador 1" value="Jugador 1">
+        <input type="text" id="nombreJ2" placeholder="Nombre Jugador 2" value="Jugador 2">
+      </div>
+
+      <p style="font-size: 13px; margin: 5px 0; color: #ffd700; text-align: center;">🏆 Récord: <b id="recordMenu">--</b></p>
+    </div>
+
+    <button id="btnJugar" class="btn-jugar">▶️ ¡JUGAR AHORA!</button>
+    <button id="btnAbrirConfig" class="btn-config-flotante">⚙️ Configuración</button>
+    <button id="btnTema" class="btn-tema-flotante">🌙</button>
+  </div>
+
+  <!-- ================= PANEL DE CONFIGURACIÓN ================= -->
+  <div id="panelConfiguracion" class="panel-config oculto-panel">
+    <div class="config-header">
+      <h2>⚙️ Configuración</h2>
+      <button id="btnCerrarConfig" class="btn-cerrar-config">✖</button>
+    </div>
+    <div class="config-contenido">
+      <button id="btnPersonalizar" class="btn-menu">⚙️ Diseño de Dorsos</button>
+      <button id="btnImagenes" class="btn-menu">🖼️ Imágenes Propias</button>
+      <button id="btnNumeros" class="btn-menu">🔢 Mostrar Números</button>
+      <button id="cambiarTema" class="btn-menu">🎨 Cambiar Emojis</button>
+      
+      <div class="opcion-color-menu">
+        <label>🎨 Color de Fondo:</label>
+        <input type="color" id="colorPicker" class="selector-color" value="#667eea">
+      </div>
+
+      <div id="panelPersonalizar" class="sub-panel">
+        <label>Tipo de Dorso:</label>
+        <select id="tipoDorso">
+          <option value="color">Color Sólido</option>
+          <option value="imagen">Imagen / Logo (Link)</option>
+          <option value="textura">Textura</option>
+        </select>
+        <div id="grupoColor" class="opcion-grupo activo">
+          <label>Color de las cartas:</label>
+          <input type="color" id="colorCarta" value="#4CAF50">
+        </div>
+        <div id="grupoImagen" class="opcion-grupo">
+          <label>Link de tu imagen:</label>
+          <input type="text" id="urlImagen" placeholder="https://ejemplo.com/logo.png">
+        </div>
+        <div id="grupoTextura" class="opcion-grupo">
+          <label>Elige una textura:</label>
+          <select id="tipoTextura">
+            <option value="madera">Madera</option>
+            <option value="rayas">Rayas</option>
+            <option value="cuadros">Cuadros</option>
+          </select>
+        </div>
+        <button onclick="document.getElementById('panelPersonalizar').classList.remove('activo')" class="btn-cerrar-sub">Cerrar</button>
+      </div>
+
+      <div id="panelImagenes" class="sub-panel">
+        <p style="font-size: 13px; margin-bottom: 10px; color: #aaa;">Links para las caras (máx 12):</p>
+        <input type="text" class="input-img" placeholder="Imagen 1">
+        <input type="text" class="input-img" placeholder="Imagen 2">
+        <input type="text" class="input-img" placeholder="Imagen 3">
+        <input type="text" class="input-img" placeholder="Imagen 4">
+        <input type="text" class="input-img" placeholder="Imagen 5">
+        <input type="text" class="input-img" placeholder="Imagen 6">
+        <input type="text" class="input-img" placeholder="Imagen 7">
+        <input type="text" class="input-img" placeholder="Imagen 8">
+        <input type="text" class="input-img" placeholder="Imagen 9">
+        <input type="text" class="input-img" placeholder="Imagen 10">
+        <input type="text" class="input-img" placeholder="Imagen 11">
+        <input type="text" class="input-img" placeholder="Imagen 12">
+        <button id="aplicarImagenes" class="btn-aplicar">Guardar Imágenes</button>
+        <button onclick="document.getElementById('panelImagenes').classList.remove('activo')" class="btn-cerrar-sub">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PANTALLA DE JUEGO ================= -->
+  <div id="pantalla-juego" class="pantalla">
+    <header>
+      <div id="marcadorMultijugador" class="marcador-multi oculto">
+        <div id="tarjetaJ1" class="tarjeta-jugador activo-turno">
+          <span class="nombre-jugador" id="nombreMostradoJ1">Jugador 1</span>
+          <span class="puntos-jugador" id="puntosJ1">0</span>
+        </div>
+        <div id="tarjetaJ2" class="tarjeta-jugador">
+          <span class="nombre-jugador" id="nombreMostradoJ2">Jugador 2</span>
+          <span class="puntos-jugador" id="puntosJ2">0</span>
+        </div>
+      </div>
+
+      <p id="indicadorTurno" class="oculto" style="font-weight: bold; color: #ffd700; font-size: 15px; margin-bottom: 5px;">Turno de: Jugador 1</p>
+
+      <div class="stats">
+        <span>Mov: <b id="movimientos">0</b></span>
+        <span>Pares: <b id="pares">0</b>/<span id="totalPares">4</span></span>
+        <span>⏱️ <b id="cronometro">01:00</b></span>
+      </div>
+      <div class="controles-juego">
+        <button id="btnVolverMenu" class="btn-volver">🏠 Menú</button>
+        <button id="reiniciar">🔄 Reiniciar</button>
+      </div>
+    </header>
+
+    <main id="tablero"></main>
+  </div>
+
+  <!-- MENSAJE DE VICTORIA / DERROTA / RESULTADOS -->
+  <div id="mensaje" class="oculto">
+    <div class="mensaje-contenido">
+      <h2 id="tituloMensaje">🎉 ¡Ganaste!</h2>
+      <div id="resultadosMultijugador" class="oculto" style="margin-bottom: 15px;">
+        <p id="resultadoJ1" style="font-size: 18px; margin: 5px 0;"></p>
+        <p id="resultadoJ2" style="font-size: 18px; margin: 5px 0;"></p>
+        <p id="ganadorFinal" style="font-size: 20px; font-weight: bold; color: #4CAF50; margin-top: 10px;"></p>
+      </div>
+      <div id="resultadosUnJugador">
+        <p>Lo lograste en <b id="movFinal">0</b> movimientos</p>
+        <p>⏱️ Tiempo: <b id="tiempoFinal">00:00</b></p>
+      </div>
+      <p id="mensajeRecord" style="color: #ff9800; font-weight: bold; margin-top: 10px;"></p>
+      
+      <!-- BOTÓN DE COMPARTIR -->
+      <button id="btnCompartir" style="background: #25D366; color: #fff; border: none; padding: 12px 20px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 15px; width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        📲 Compartir Resultado
+      </button>
+      
+      <button id="jugarOtra" style="margin-top: 10px;">Jugar otra vez</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
